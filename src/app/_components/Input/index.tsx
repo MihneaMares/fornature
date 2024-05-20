@@ -47,13 +47,7 @@ export const Input: React.FC<Props> = ({
         })}
         disabled={disabled}
       />
-      {error && (
-        <div className={classes.errorMessage}>
-          {!error?.message && error?.type === 'required'
-            ? 'This field is required'
-            : error?.message}
-        </div>
-      )}
+      
     </div>
   )
 }
