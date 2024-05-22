@@ -57,7 +57,7 @@ export const seed = async (payload: Payload): Promise<void> => {
   const [image1Doc, image2Doc, image3Doc] = await Promise.all([
     await payload.create({
       collection: 'media',
-      filePath: path.resolve(__dirname, 'image-1.jpg'),
+      filePath: path.resolve(__dirname, 'forNature1.jpg'),
       data: image1,
     }),
     await payload.create({

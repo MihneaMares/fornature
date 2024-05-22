@@ -7,7 +7,13 @@ export const Footer: GlobalConfig = {
   access: {
     read: () => true,
   },
-  fields: [
+fields: [
+    {
+      name:'copyright',
+      label:'Copyright',
+      type:'text',
+      required:true,
+    },
     {
       name: 'navItems',
       type: 'array',

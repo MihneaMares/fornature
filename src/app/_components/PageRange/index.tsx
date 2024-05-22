@@ -3,8 +3,8 @@ import React from 'react'
 import classes from './index.module.scss'
 
 const defaultLabels = {
-  plural: 'Docs',
-  singular: 'Doc',
+  plural: 'Items',
+  singular: 'Item',
 }
 
 const defaultCollectionLabels = {
