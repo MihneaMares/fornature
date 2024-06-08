@@ -23,6 +23,9 @@ type Query {
   docAccessUser(id: String!): usersDocAccess
   meUser: usersMe
   initializedUser: Boolean
+  Story(id: String!, draft: Boolean): Story
+  Stories(draft: Boolean, where: Story_where, limit: Int, page: Int, sort: String): Stories
+  docAccessStory(id: String!): storiesDocAccess
   Redirect(id: String!, draft: Boolean): Redirect
   Redirects(draft: Boolean, where: Redirect_where, limit: Int, page: Int, sort: String): Redirects
   docAccessRedirect(id: String!): redirectsDocAccess
@@ -35,6 +38,8 @@ type Query {
   docAccessHeader: headerDocAccess
   Footer(draft: Boolean): Footer
   docAccessFooter: footerDocAccess
+  StoryPage(draft: Boolean): StoryPage
+  docAccessStoryPage: story_pageDocAccess
   Access: Access
 }
 
@@ -6765,6 +6770,580 @@ type usersMe {
   user: User
 }
 
+type Story {
+  id: String
+  title: String!
+  content(depth: Int): JSON!
+  author: String
+  image(where: Story_Image_where): Media
+  tags: [Story_Tags!]
+  updatedAt: DateTime
+  createdAt: DateTime
+}
+
+input Story_Image_where {
+  alt: Story_Image_alt_operator
+  caption: Story_Image_caption_operator
+  updatedAt: Story_Image_updatedAt_operator
+  createdAt: Story_Image_createdAt_operator
+  url: Story_Image_url_operator
+  filename: Story_Image_filename_operator
+  mimeType: Story_Image_mimeType_operator
+  filesize: Story_Image_filesize_operator
+  width: Story_Image_width_operator
+  height: Story_Image_height_operator
+  id: Story_Image_id_operator
+  AND: [Story_Image_where_and]
+  OR: [Story_Image_where_or]
+}
+
+input Story_Image_alt_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+}
+
+input Story_Image_caption_operator {
+  equals: JSON
+  not_equals: JSON
+  like: JSON
+  contains: JSON
+  exists: Boolean
+}
+
+input Story_Image_updatedAt_operator {
+  equals: DateTime
+  not_equals: DateTime
+  greater_than_equal: DateTime
+  greater_than: DateTime
+  less_than_equal: DateTime
+  less_than: DateTime
+  like: DateTime
+  exists: Boolean
+}
+
+input Story_Image_createdAt_operator {
+  equals: DateTime
+  not_equals: DateTime
+  greater_than_equal: DateTime
+  greater_than: DateTime
+  less_than_equal: DateTime
+  less_than: DateTime
+  like: DateTime
+  exists: Boolean
+}
+
+input Story_Image_url_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input Story_Image_filename_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input Story_Image_mimeType_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input Story_Image_filesize_operator {
+  equals: Float
+  not_equals: Float
+  greater_than_equal: Float
+  greater_than: Float
+  less_than_equal: Float
+  less_than: Float
+  exists: Boolean
+}
+
+input Story_Image_width_operator {
+  equals: Float
+  not_equals: Float
+  greater_than_equal: Float
+  greater_than: Float
+  less_than_equal: Float
+  less_than: Float
+  exists: Boolean
+}
+
+input Story_Image_height_operator {
+  equals: Float
+  not_equals: Float
+  greater_than_equal: Float
+  greater_than: Float
+  less_than_equal: Float
+  less_than: Float
+  exists: Boolean
+}
+
+input Story_Image_id_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input Story_Image_where_and {
+  alt: Story_Image_alt_operator
+  caption: Story_Image_caption_operator
+  updatedAt: Story_Image_updatedAt_operator
+  createdAt: Story_Image_createdAt_operator
+  url: Story_Image_url_operator
+  filename: Story_Image_filename_operator
+  mimeType: Story_Image_mimeType_operator
+  filesize: Story_Image_filesize_operator
+  width: Story_Image_width_operator
+  height: Story_Image_height_operator
+  id: Story_Image_id_operator
+  AND: [Story_Image_where_and]
+  OR: [Story_Image_where_or]
+}
+
+input Story_Image_where_or {
+  alt: Story_Image_alt_operator
+  caption: Story_Image_caption_operator
+  updatedAt: Story_Image_updatedAt_operator
+  createdAt: Story_Image_createdAt_operator
+  url: Story_Image_url_operator
+  filename: Story_Image_filename_operator
+  mimeType: Story_Image_mimeType_operator
+  filesize: Story_Image_filesize_operator
+  width: Story_Image_width_operator
+  height: Story_Image_height_operator
+  id: Story_Image_id_operator
+  AND: [Story_Image_where_and]
+  OR: [Story_Image_where_or]
+}
+
+type Story_Tags {
+  storycategory: String
+  id: String
+}
+
+type Stories {
+  docs: [Story]
+  hasNextPage: Boolean
+  hasPrevPage: Boolean
+  limit: Int
+  nextPage: Int
+  offset: Int
+  page: Int
+  pagingCounter: Int
+  prevPage: Int
+  totalDocs: Int
+  totalPages: Int
+}
+
+input Story_where {
+  title: Story_title_operator
+  content: Story_content_operator
+  author: Story_author_operator
+  image: Story_image_operator
+  tags__storycategory: Story_tags__storycategory_operator
+  tags__id: Story_tags__id_operator
+  updatedAt: Story_updatedAt_operator
+  createdAt: Story_createdAt_operator
+  id: Story_id_operator
+  AND: [Story_where_and]
+  OR: [Story_where_or]
+}
+
+input Story_title_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+}
+
+input Story_content_operator {
+  equals: JSON
+  not_equals: JSON
+  like: JSON
+  contains: JSON
+}
+
+input Story_author_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input Story_image_operator {
+  equals: String
+  not_equals: String
+  exists: Boolean
+}
+
+input Story_tags__storycategory_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input Story_tags__id_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input Story_updatedAt_operator {
+  equals: DateTime
+  not_equals: DateTime
+  greater_than_equal: DateTime
+  greater_than: DateTime
+  less_than_equal: DateTime
+  less_than: DateTime
+  like: DateTime
+  exists: Boolean
+}
+
+input Story_createdAt_operator {
+  equals: DateTime
+  not_equals: DateTime
+  greater_than_equal: DateTime
+  greater_than: DateTime
+  less_than_equal: DateTime
+  less_than: DateTime
+  like: DateTime
+  exists: Boolean
+}
+
+input Story_id_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input Story_where_and {
+  title: Story_title_operator
+  content: Story_content_operator
+  author: Story_author_operator
+  image: Story_image_operator
+  tags__storycategory: Story_tags__storycategory_operator
+  tags__id: Story_tags__id_operator
+  updatedAt: Story_updatedAt_operator
+  createdAt: Story_createdAt_operator
+  id: Story_id_operator
+  AND: [Story_where_and]
+  OR: [Story_where_or]
+}
+
+input Story_where_or {
+  title: Story_title_operator
+  content: Story_content_operator
+  author: Story_author_operator
+  image: Story_image_operator
+  tags__storycategory: Story_tags__storycategory_operator
+  tags__id: Story_tags__id_operator
+  updatedAt: Story_updatedAt_operator
+  createdAt: Story_createdAt_operator
+  id: Story_id_operator
+  AND: [Story_where_and]
+  OR: [Story_where_or]
+}
+
+type storiesDocAccess {
+  fields: StoriesDocAccessFields
+  create: StoriesCreateDocAccess
+  read: StoriesReadDocAccess
+  update: StoriesUpdateDocAccess
+  delete: StoriesDeleteDocAccess
+}
+
+type StoriesDocAccessFields {
+  title: StoriesDocAccessFields_title
+  content: StoriesDocAccessFields_content
+  author: StoriesDocAccessFields_author
+  image: StoriesDocAccessFields_image
+  tags: StoriesDocAccessFields_tags
+  updatedAt: StoriesDocAccessFields_updatedAt
+  createdAt: StoriesDocAccessFields_createdAt
+}
+
+type StoriesDocAccessFields_title {
+  create: StoriesDocAccessFields_title_Create
+  read: StoriesDocAccessFields_title_Read
+  update: StoriesDocAccessFields_title_Update
+  delete: StoriesDocAccessFields_title_Delete
+}
+
+type StoriesDocAccessFields_title_Create {
+  permission: Boolean!
+}
+
+type StoriesDocAccessFields_title_Read {
+  permission: Boolean!
+}
+
+type StoriesDocAccessFields_title_Update {
+  permission: Boolean!
+}
+
+type StoriesDocAccessFields_title_Delete {
+  permission: Boolean!
+}
+
+type StoriesDocAccessFields_content {
+  create: StoriesDocAccessFields_content_Create
+  read: StoriesDocAccessFields_content_Read
+  update: StoriesDocAccessFields_content_Update
+  delete: StoriesDocAccessFields_content_Delete
+}
+
+type StoriesDocAccessFields_content_Create {
+  permission: Boolean!
+}
+
+type StoriesDocAccessFields_content_Read {
+  permission: Boolean!
+}
+
+type StoriesDocAccessFields_content_Update {
+  permission: Boolean!
+}
+
+type StoriesDocAccessFields_content_Delete {
+  permission: Boolean!
+}
+
+type StoriesDocAccessFields_author {
+  create: StoriesDocAccessFields_author_Create
+  read: StoriesDocAccessFields_author_Read
+  update: StoriesDocAccessFields_author_Update
+  delete: StoriesDocAccessFields_author_Delete
+}
+
+type StoriesDocAccessFields_author_Create {
+  permission: Boolean!
+}
+
+type StoriesDocAccessFields_author_Read {
+  permission: Boolean!
+}
+
+type StoriesDocAccessFields_author_Update {
+  permission: Boolean!
+}
+
+type StoriesDocAccessFields_author_Delete {
+  permission: Boolean!
+}
+
+type StoriesDocAccessFields_image {
+  create: StoriesDocAccessFields_image_Create
+  read: StoriesDocAccessFields_image_Read
+  update: StoriesDocAccessFields_image_Update
+  delete: StoriesDocAccessFields_image_Delete
+}
+
+type StoriesDocAccessFields_image_Create {
+  permission: Boolean!
+}
+
+type StoriesDocAccessFields_image_Read {
+  permission: Boolean!
+}
+
+type StoriesDocAccessFields_image_Update {
+  permission: Boolean!
+}
+
+type StoriesDocAccessFields_image_Delete {
+  permission: Boolean!
+}
+
+type StoriesDocAccessFields_tags {
+  create: StoriesDocAccessFields_tags_Create
+  read: StoriesDocAccessFields_tags_Read
+  update: StoriesDocAccessFields_tags_Update
+  delete: StoriesDocAccessFields_tags_Delete
+  fields: StoriesDocAccessFields_tags_Fields
+}
+
+type StoriesDocAccessFields_tags_Create {
+  permission: Boolean!
+}
+
+type StoriesDocAccessFields_tags_Read {
+  permission: Boolean!
+}
+
+type StoriesDocAccessFields_tags_Update {
+  permission: Boolean!
+}
+
+type StoriesDocAccessFields_tags_Delete {
+  permission: Boolean!
+}
+
+type StoriesDocAccessFields_tags_Fields {
+  storycategory: StoriesDocAccessFields_tags_storycategory
+  id: StoriesDocAccessFields_tags_id
+}
+
+type StoriesDocAccessFields_tags_storycategory {
+  create: StoriesDocAccessFields_tags_storycategory_Create
+  read: StoriesDocAccessFields_tags_storycategory_Read
+  update: StoriesDocAccessFields_tags_storycategory_Update
+  delete: StoriesDocAccessFields_tags_storycategory_Delete
+}
+
+type StoriesDocAccessFields_tags_storycategory_Create {
+  permission: Boolean!
+}
+
+type StoriesDocAccessFields_tags_storycategory_Read {
+  permission: Boolean!
+}
+
+type StoriesDocAccessFields_tags_storycategory_Update {
+  permission: Boolean!
+}
+
+type StoriesDocAccessFields_tags_storycategory_Delete {
+  permission: Boolean!
+}
+
+type StoriesDocAccessFields_tags_id {
+  create: StoriesDocAccessFields_tags_id_Create
+  read: StoriesDocAccessFields_tags_id_Read
+  update: StoriesDocAccessFields_tags_id_Update
+  delete: StoriesDocAccessFields_tags_id_Delete
+}
+
+type StoriesDocAccessFields_tags_id_Create {
+  permission: Boolean!
+}
+
+type StoriesDocAccessFields_tags_id_Read {
+  permission: Boolean!
+}
+
+type StoriesDocAccessFields_tags_id_Update {
+  permission: Boolean!
+}
+
+type StoriesDocAccessFields_tags_id_Delete {
+  permission: Boolean!
+}
+
+type StoriesDocAccessFields_updatedAt {
+  create: StoriesDocAccessFields_updatedAt_Create
+  read: StoriesDocAccessFields_updatedAt_Read
+  update: StoriesDocAccessFields_updatedAt_Update
+  delete: StoriesDocAccessFields_updatedAt_Delete
+}
+
+type StoriesDocAccessFields_updatedAt_Create {
+  permission: Boolean!
+}
+
+type StoriesDocAccessFields_updatedAt_Read {
+  permission: Boolean!
+}
+
+type StoriesDocAccessFields_updatedAt_Update {
+  permission: Boolean!
+}
+
+type StoriesDocAccessFields_updatedAt_Delete {
+  permission: Boolean!
+}
+
+type StoriesDocAccessFields_createdAt {
+  create: StoriesDocAccessFields_createdAt_Create
+  read: StoriesDocAccessFields_createdAt_Read
+  update: StoriesDocAccessFields_createdAt_Update
+  delete: StoriesDocAccessFields_createdAt_Delete
+}
+
+type StoriesDocAccessFields_createdAt_Create {
+  permission: Boolean!
+}
+
+type StoriesDocAccessFields_createdAt_Read {
+  permission: Boolean!
+}
+
+type StoriesDocAccessFields_createdAt_Update {
+  permission: Boolean!
+}
+
+type StoriesDocAccessFields_createdAt_Delete {
+  permission: Boolean!
+}
+
+type StoriesCreateDocAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type StoriesReadDocAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type StoriesUpdateDocAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type StoriesDeleteDocAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
 type Redirect {
   id: String
   from: String!
@@ -8506,6 +9085,356 @@ type FooterUpdateDocAccess {
   where: JSONObject
 }
 
+type StoryPage {
+  hero: StoryPage_Hero
+  content: [StoryPage_Content!]
+  updatedAt: DateTime
+  createdAt: DateTime
+}
+
+type StoryPage_Hero {
+  title: String
+  image(where: StoryPage_Hero_Image_where): Media
+}
+
+input StoryPage_Hero_Image_where {
+  alt: StoryPage_Hero_Image_alt_operator
+  caption: StoryPage_Hero_Image_caption_operator
+  updatedAt: StoryPage_Hero_Image_updatedAt_operator
+  createdAt: StoryPage_Hero_Image_createdAt_operator
+  url: StoryPage_Hero_Image_url_operator
+  filename: StoryPage_Hero_Image_filename_operator
+  mimeType: StoryPage_Hero_Image_mimeType_operator
+  filesize: StoryPage_Hero_Image_filesize_operator
+  width: StoryPage_Hero_Image_width_operator
+  height: StoryPage_Hero_Image_height_operator
+  id: StoryPage_Hero_Image_id_operator
+  AND: [StoryPage_Hero_Image_where_and]
+  OR: [StoryPage_Hero_Image_where_or]
+}
+
+input StoryPage_Hero_Image_alt_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+}
+
+input StoryPage_Hero_Image_caption_operator {
+  equals: JSON
+  not_equals: JSON
+  like: JSON
+  contains: JSON
+  exists: Boolean
+}
+
+input StoryPage_Hero_Image_updatedAt_operator {
+  equals: DateTime
+  not_equals: DateTime
+  greater_than_equal: DateTime
+  greater_than: DateTime
+  less_than_equal: DateTime
+  less_than: DateTime
+  like: DateTime
+  exists: Boolean
+}
+
+input StoryPage_Hero_Image_createdAt_operator {
+  equals: DateTime
+  not_equals: DateTime
+  greater_than_equal: DateTime
+  greater_than: DateTime
+  less_than_equal: DateTime
+  less_than: DateTime
+  like: DateTime
+  exists: Boolean
+}
+
+input StoryPage_Hero_Image_url_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input StoryPage_Hero_Image_filename_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input StoryPage_Hero_Image_mimeType_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input StoryPage_Hero_Image_filesize_operator {
+  equals: Float
+  not_equals: Float
+  greater_than_equal: Float
+  greater_than: Float
+  less_than_equal: Float
+  less_than: Float
+  exists: Boolean
+}
+
+input StoryPage_Hero_Image_width_operator {
+  equals: Float
+  not_equals: Float
+  greater_than_equal: Float
+  greater_than: Float
+  less_than_equal: Float
+  less_than: Float
+  exists: Boolean
+}
+
+input StoryPage_Hero_Image_height_operator {
+  equals: Float
+  not_equals: Float
+  greater_than_equal: Float
+  greater_than: Float
+  less_than_equal: Float
+  less_than: Float
+  exists: Boolean
+}
+
+input StoryPage_Hero_Image_id_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input StoryPage_Hero_Image_where_and {
+  alt: StoryPage_Hero_Image_alt_operator
+  caption: StoryPage_Hero_Image_caption_operator
+  updatedAt: StoryPage_Hero_Image_updatedAt_operator
+  createdAt: StoryPage_Hero_Image_createdAt_operator
+  url: StoryPage_Hero_Image_url_operator
+  filename: StoryPage_Hero_Image_filename_operator
+  mimeType: StoryPage_Hero_Image_mimeType_operator
+  filesize: StoryPage_Hero_Image_filesize_operator
+  width: StoryPage_Hero_Image_width_operator
+  height: StoryPage_Hero_Image_height_operator
+  id: StoryPage_Hero_Image_id_operator
+  AND: [StoryPage_Hero_Image_where_and]
+  OR: [StoryPage_Hero_Image_where_or]
+}
+
+input StoryPage_Hero_Image_where_or {
+  alt: StoryPage_Hero_Image_alt_operator
+  caption: StoryPage_Hero_Image_caption_operator
+  updatedAt: StoryPage_Hero_Image_updatedAt_operator
+  createdAt: StoryPage_Hero_Image_createdAt_operator
+  url: StoryPage_Hero_Image_url_operator
+  filename: StoryPage_Hero_Image_filename_operator
+  mimeType: StoryPage_Hero_Image_mimeType_operator
+  filesize: StoryPage_Hero_Image_filesize_operator
+  width: StoryPage_Hero_Image_width_operator
+  height: StoryPage_Hero_Image_height_operator
+  id: StoryPage_Hero_Image_id_operator
+  AND: [StoryPage_Hero_Image_where_and]
+  OR: [StoryPage_Hero_Image_where_or]
+}
+
+union StoryPage_Content = StoryPosts
+
+type StoryPosts {
+  posts: [Story!]
+  id: String
+  blockName: String
+  blockType: String
+}
+
+type story_pageDocAccess {
+  fields: StoryPageDocAccessFields
+  read: StoryPageReadDocAccess
+  update: StoryPageUpdateDocAccess
+}
+
+type StoryPageDocAccessFields {
+  hero: StoryPageDocAccessFields_hero
+  content: StoryPageDocAccessFields_content
+  updatedAt: StoryPageDocAccessFields_updatedAt
+  createdAt: StoryPageDocAccessFields_createdAt
+}
+
+type StoryPageDocAccessFields_hero {
+  create: StoryPageDocAccessFields_hero_Create
+  read: StoryPageDocAccessFields_hero_Read
+  update: StoryPageDocAccessFields_hero_Update
+  delete: StoryPageDocAccessFields_hero_Delete
+  fields: StoryPageDocAccessFields_hero_Fields
+}
+
+type StoryPageDocAccessFields_hero_Create {
+  permission: Boolean!
+}
+
+type StoryPageDocAccessFields_hero_Read {
+  permission: Boolean!
+}
+
+type StoryPageDocAccessFields_hero_Update {
+  permission: Boolean!
+}
+
+type StoryPageDocAccessFields_hero_Delete {
+  permission: Boolean!
+}
+
+type StoryPageDocAccessFields_hero_Fields {
+  title: StoryPageDocAccessFields_hero_title
+  image: StoryPageDocAccessFields_hero_image
+}
+
+type StoryPageDocAccessFields_hero_title {
+  create: StoryPageDocAccessFields_hero_title_Create
+  read: StoryPageDocAccessFields_hero_title_Read
+  update: StoryPageDocAccessFields_hero_title_Update
+  delete: StoryPageDocAccessFields_hero_title_Delete
+}
+
+type StoryPageDocAccessFields_hero_title_Create {
+  permission: Boolean!
+}
+
+type StoryPageDocAccessFields_hero_title_Read {
+  permission: Boolean!
+}
+
+type StoryPageDocAccessFields_hero_title_Update {
+  permission: Boolean!
+}
+
+type StoryPageDocAccessFields_hero_title_Delete {
+  permission: Boolean!
+}
+
+type StoryPageDocAccessFields_hero_image {
+  create: StoryPageDocAccessFields_hero_image_Create
+  read: StoryPageDocAccessFields_hero_image_Read
+  update: StoryPageDocAccessFields_hero_image_Update
+  delete: StoryPageDocAccessFields_hero_image_Delete
+}
+
+type StoryPageDocAccessFields_hero_image_Create {
+  permission: Boolean!
+}
+
+type StoryPageDocAccessFields_hero_image_Read {
+  permission: Boolean!
+}
+
+type StoryPageDocAccessFields_hero_image_Update {
+  permission: Boolean!
+}
+
+type StoryPageDocAccessFields_hero_image_Delete {
+  permission: Boolean!
+}
+
+type StoryPageDocAccessFields_content {
+  create: StoryPageDocAccessFields_content_Create
+  read: StoryPageDocAccessFields_content_Read
+  update: StoryPageDocAccessFields_content_Update
+  delete: StoryPageDocAccessFields_content_Delete
+}
+
+type StoryPageDocAccessFields_content_Create {
+  permission: Boolean!
+}
+
+type StoryPageDocAccessFields_content_Read {
+  permission: Boolean!
+}
+
+type StoryPageDocAccessFields_content_Update {
+  permission: Boolean!
+}
+
+type StoryPageDocAccessFields_content_Delete {
+  permission: Boolean!
+}
+
+type StoryPageDocAccessFields_updatedAt {
+  create: StoryPageDocAccessFields_updatedAt_Create
+  read: StoryPageDocAccessFields_updatedAt_Read
+  update: StoryPageDocAccessFields_updatedAt_Update
+  delete: StoryPageDocAccessFields_updatedAt_Delete
+}
+
+type StoryPageDocAccessFields_updatedAt_Create {
+  permission: Boolean!
+}
+
+type StoryPageDocAccessFields_updatedAt_Read {
+  permission: Boolean!
+}
+
+type StoryPageDocAccessFields_updatedAt_Update {
+  permission: Boolean!
+}
+
+type StoryPageDocAccessFields_updatedAt_Delete {
+  permission: Boolean!
+}
+
+type StoryPageDocAccessFields_createdAt {
+  create: StoryPageDocAccessFields_createdAt_Create
+  read: StoryPageDocAccessFields_createdAt_Read
+  update: StoryPageDocAccessFields_createdAt_Update
+  delete: StoryPageDocAccessFields_createdAt_Delete
+}
+
+type StoryPageDocAccessFields_createdAt_Create {
+  permission: Boolean!
+}
+
+type StoryPageDocAccessFields_createdAt_Read {
+  permission: Boolean!
+}
+
+type StoryPageDocAccessFields_createdAt_Update {
+  permission: Boolean!
+}
+
+type StoryPageDocAccessFields_createdAt_Delete {
+  permission: Boolean!
+}
+
+type StoryPageReadDocAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type StoryPageUpdateDocAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
 type Access {
   canAccessAdmin: Boolean!
   pages: pagesAccess
@@ -8514,11 +9443,13 @@ type Access {
   media: mediaAccess
   categories: categoriesAccess
   users: usersAccess
+  stories: storiesAccess
   redirects: redirectsAccess
   payload_preferences: payload_preferencesAccess
   settings: settingsAccess
   header: headerAccess
   footer: footerAccess
+  story_page: story_pageAccess
 }
 
 type pagesAccess {
@@ -10945,6 +11876,257 @@ type UsersUnlockAccess {
   where: JSONObject
 }
 
+type storiesAccess {
+  fields: StoriesFields
+  create: StoriesCreateAccess
+  read: StoriesReadAccess
+  update: StoriesUpdateAccess
+  delete: StoriesDeleteAccess
+}
+
+type StoriesFields {
+  title: StoriesFields_title
+  content: StoriesFields_content
+  author: StoriesFields_author
+  image: StoriesFields_image
+  tags: StoriesFields_tags
+  updatedAt: StoriesFields_updatedAt
+  createdAt: StoriesFields_createdAt
+}
+
+type StoriesFields_title {
+  create: StoriesFields_title_Create
+  read: StoriesFields_title_Read
+  update: StoriesFields_title_Update
+  delete: StoriesFields_title_Delete
+}
+
+type StoriesFields_title_Create {
+  permission: Boolean!
+}
+
+type StoriesFields_title_Read {
+  permission: Boolean!
+}
+
+type StoriesFields_title_Update {
+  permission: Boolean!
+}
+
+type StoriesFields_title_Delete {
+  permission: Boolean!
+}
+
+type StoriesFields_content {
+  create: StoriesFields_content_Create
+  read: StoriesFields_content_Read
+  update: StoriesFields_content_Update
+  delete: StoriesFields_content_Delete
+}
+
+type StoriesFields_content_Create {
+  permission: Boolean!
+}
+
+type StoriesFields_content_Read {
+  permission: Boolean!
+}
+
+type StoriesFields_content_Update {
+  permission: Boolean!
+}
+
+type StoriesFields_content_Delete {
+  permission: Boolean!
+}
+
+type StoriesFields_author {
+  create: StoriesFields_author_Create
+  read: StoriesFields_author_Read
+  update: StoriesFields_author_Update
+  delete: StoriesFields_author_Delete
+}
+
+type StoriesFields_author_Create {
+  permission: Boolean!
+}
+
+type StoriesFields_author_Read {
+  permission: Boolean!
+}
+
+type StoriesFields_author_Update {
+  permission: Boolean!
+}
+
+type StoriesFields_author_Delete {
+  permission: Boolean!
+}
+
+type StoriesFields_image {
+  create: StoriesFields_image_Create
+  read: StoriesFields_image_Read
+  update: StoriesFields_image_Update
+  delete: StoriesFields_image_Delete
+}
+
+type StoriesFields_image_Create {
+  permission: Boolean!
+}
+
+type StoriesFields_image_Read {
+  permission: Boolean!
+}
+
+type StoriesFields_image_Update {
+  permission: Boolean!
+}
+
+type StoriesFields_image_Delete {
+  permission: Boolean!
+}
+
+type StoriesFields_tags {
+  create: StoriesFields_tags_Create
+  read: StoriesFields_tags_Read
+  update: StoriesFields_tags_Update
+  delete: StoriesFields_tags_Delete
+  fields: StoriesFields_tags_Fields
+}
+
+type StoriesFields_tags_Create {
+  permission: Boolean!
+}
+
+type StoriesFields_tags_Read {
+  permission: Boolean!
+}
+
+type StoriesFields_tags_Update {
+  permission: Boolean!
+}
+
+type StoriesFields_tags_Delete {
+  permission: Boolean!
+}
+
+type StoriesFields_tags_Fields {
+  storycategory: StoriesFields_tags_storycategory
+  id: StoriesFields_tags_id
+}
+
+type StoriesFields_tags_storycategory {
+  create: StoriesFields_tags_storycategory_Create
+  read: StoriesFields_tags_storycategory_Read
+  update: StoriesFields_tags_storycategory_Update
+  delete: StoriesFields_tags_storycategory_Delete
+}
+
+type StoriesFields_tags_storycategory_Create {
+  permission: Boolean!
+}
+
+type StoriesFields_tags_storycategory_Read {
+  permission: Boolean!
+}
+
+type StoriesFields_tags_storycategory_Update {
+  permission: Boolean!
+}
+
+type StoriesFields_tags_storycategory_Delete {
+  permission: Boolean!
+}
+
+type StoriesFields_tags_id {
+  create: StoriesFields_tags_id_Create
+  read: StoriesFields_tags_id_Read
+  update: StoriesFields_tags_id_Update
+  delete: StoriesFields_tags_id_Delete
+}
+
+type StoriesFields_tags_id_Create {
+  permission: Boolean!
+}
+
+type StoriesFields_tags_id_Read {
+  permission: Boolean!
+}
+
+type StoriesFields_tags_id_Update {
+  permission: Boolean!
+}
+
+type StoriesFields_tags_id_Delete {
+  permission: Boolean!
+}
+
+type StoriesFields_updatedAt {
+  create: StoriesFields_updatedAt_Create
+  read: StoriesFields_updatedAt_Read
+  update: StoriesFields_updatedAt_Update
+  delete: StoriesFields_updatedAt_Delete
+}
+
+type StoriesFields_updatedAt_Create {
+  permission: Boolean!
+}
+
+type StoriesFields_updatedAt_Read {
+  permission: Boolean!
+}
+
+type StoriesFields_updatedAt_Update {
+  permission: Boolean!
+}
+
+type StoriesFields_updatedAt_Delete {
+  permission: Boolean!
+}
+
+type StoriesFields_createdAt {
+  create: StoriesFields_createdAt_Create
+  read: StoriesFields_createdAt_Read
+  update: StoriesFields_createdAt_Update
+  delete: StoriesFields_createdAt_Delete
+}
+
+type StoriesFields_createdAt_Create {
+  permission: Boolean!
+}
+
+type StoriesFields_createdAt_Read {
+  permission: Boolean!
+}
+
+type StoriesFields_createdAt_Update {
+  permission: Boolean!
+}
+
+type StoriesFields_createdAt_Delete {
+  permission: Boolean!
+}
+
+type StoriesCreateAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type StoriesReadAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type StoriesUpdateAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type StoriesDeleteAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
 type redirectsAccess {
   fields: RedirectsFields
   create: RedirectsCreateAccess
@@ -11996,6 +13178,173 @@ type FooterUpdateAccess {
   where: JSONObject
 }
 
+type story_pageAccess {
+  fields: StoryPageFields
+  read: StoryPageReadAccess
+  update: StoryPageUpdateAccess
+}
+
+type StoryPageFields {
+  hero: StoryPageFields_hero
+  content: StoryPageFields_content
+  updatedAt: StoryPageFields_updatedAt
+  createdAt: StoryPageFields_createdAt
+}
+
+type StoryPageFields_hero {
+  create: StoryPageFields_hero_Create
+  read: StoryPageFields_hero_Read
+  update: StoryPageFields_hero_Update
+  delete: StoryPageFields_hero_Delete
+  fields: StoryPageFields_hero_Fields
+}
+
+type StoryPageFields_hero_Create {
+  permission: Boolean!
+}
+
+type StoryPageFields_hero_Read {
+  permission: Boolean!
+}
+
+type StoryPageFields_hero_Update {
+  permission: Boolean!
+}
+
+type StoryPageFields_hero_Delete {
+  permission: Boolean!
+}
+
+type StoryPageFields_hero_Fields {
+  title: StoryPageFields_hero_title
+  image: StoryPageFields_hero_image
+}
+
+type StoryPageFields_hero_title {
+  create: StoryPageFields_hero_title_Create
+  read: StoryPageFields_hero_title_Read
+  update: StoryPageFields_hero_title_Update
+  delete: StoryPageFields_hero_title_Delete
+}
+
+type StoryPageFields_hero_title_Create {
+  permission: Boolean!
+}
+
+type StoryPageFields_hero_title_Read {
+  permission: Boolean!
+}
+
+type StoryPageFields_hero_title_Update {
+  permission: Boolean!
+}
+
+type StoryPageFields_hero_title_Delete {
+  permission: Boolean!
+}
+
+type StoryPageFields_hero_image {
+  create: StoryPageFields_hero_image_Create
+  read: StoryPageFields_hero_image_Read
+  update: StoryPageFields_hero_image_Update
+  delete: StoryPageFields_hero_image_Delete
+}
+
+type StoryPageFields_hero_image_Create {
+  permission: Boolean!
+}
+
+type StoryPageFields_hero_image_Read {
+  permission: Boolean!
+}
+
+type StoryPageFields_hero_image_Update {
+  permission: Boolean!
+}
+
+type StoryPageFields_hero_image_Delete {
+  permission: Boolean!
+}
+
+type StoryPageFields_content {
+  create: StoryPageFields_content_Create
+  read: StoryPageFields_content_Read
+  update: StoryPageFields_content_Update
+  delete: StoryPageFields_content_Delete
+}
+
+type StoryPageFields_content_Create {
+  permission: Boolean!
+}
+
+type StoryPageFields_content_Read {
+  permission: Boolean!
+}
+
+type StoryPageFields_content_Update {
+  permission: Boolean!
+}
+
+type StoryPageFields_content_Delete {
+  permission: Boolean!
+}
+
+type StoryPageFields_updatedAt {
+  create: StoryPageFields_updatedAt_Create
+  read: StoryPageFields_updatedAt_Read
+  update: StoryPageFields_updatedAt_Update
+  delete: StoryPageFields_updatedAt_Delete
+}
+
+type StoryPageFields_updatedAt_Create {
+  permission: Boolean!
+}
+
+type StoryPageFields_updatedAt_Read {
+  permission: Boolean!
+}
+
+type StoryPageFields_updatedAt_Update {
+  permission: Boolean!
+}
+
+type StoryPageFields_updatedAt_Delete {
+  permission: Boolean!
+}
+
+type StoryPageFields_createdAt {
+  create: StoryPageFields_createdAt_Create
+  read: StoryPageFields_createdAt_Read
+  update: StoryPageFields_createdAt_Update
+  delete: StoryPageFields_createdAt_Delete
+}
+
+type StoryPageFields_createdAt_Create {
+  permission: Boolean!
+}
+
+type StoryPageFields_createdAt_Read {
+  permission: Boolean!
+}
+
+type StoryPageFields_createdAt_Update {
+  permission: Boolean!
+}
+
+type StoryPageFields_createdAt_Delete {
+  permission: Boolean!
+}
+
+type StoryPageReadAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type StoryPageUpdateAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
 type Mutation {
   createPage(data: mutationPageInput!, draft: Boolean): Page
   updatePage(id: String!, autosave: Boolean, data: mutationPageUpdateInput!, draft: Boolean): Page
@@ -12024,6 +13373,9 @@ type Mutation {
   forgotPasswordUser(disableEmail: Boolean, email: String!, expiration: Int): Boolean!
   resetPasswordUser(password: String, token: String): usersResetPassword
   verifyEmailUser(token: String): Boolean
+  createStory(data: mutationStoryInput!, draft: Boolean): Story
+  updateStory(id: String!, autosave: Boolean, data: mutationStoryUpdateInput!, draft: Boolean): Story
+  deleteStory(id: String!): Story
   createRedirect(data: mutationRedirectInput!, draft: Boolean): Redirect
   updateRedirect(id: String!, autosave: Boolean, data: mutationRedirectUpdateInput!, draft: Boolean): Redirect
   deleteRedirect(id: String!): Redirect
@@ -12033,6 +13385,7 @@ type Mutation {
   updateSettings(data: mutationSettingsInput!, draft: Boolean): Settings
   updateHeader(data: mutationHeaderInput!, draft: Boolean): Header
   updateFooter(data: mutationFooterInput!, draft: Boolean): Footer
+  updateStoryPage(data: mutationStoryPageInput!, draft: Boolean): StoryPage
 }
 
 input mutationPageInput {
@@ -12409,6 +13762,36 @@ type usersResetPassword {
   user: User
 }
 
+input mutationStoryInput {
+  title: String!
+  content: JSON!
+  author: String
+  image: String
+  tags: [mutationStory_TagsInput]
+  updatedAt: String
+  createdAt: String
+}
+
+input mutationStory_TagsInput {
+  storycategory: String
+  id: String
+}
+
+input mutationStoryUpdateInput {
+  title: String
+  content: JSON
+  author: String
+  image: String
+  tags: [mutationStoryUpdate_TagsInput]
+  updatedAt: String
+  createdAt: String
+}
+
+input mutationStoryUpdate_TagsInput {
+  storycategory: String
+  id: String
+}
+
 input mutationRedirectInput {
   from: String!
   to: mutationRedirect_ToInput!
@@ -12552,4 +13935,16 @@ input Footer_NavItems_Link_ReferenceRelationshipInput {
 
 enum Footer_NavItems_Link_ReferenceRelationshipInputRelationTo {
   pages
+}
+
+input mutationStoryPageInput {
+  hero: mutationStoryPage_HeroInput!
+  content: JSON
+  updatedAt: String
+  createdAt: String
+}
+
+input mutationStoryPage_HeroInput {
+  title: String!
+  image: String
 }

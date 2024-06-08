@@ -10,6 +10,7 @@ import { InitTheme } from './_providers/Theme/InitTheme'
 import { mergeOpenGraph } from './_utilities/mergeOpenGraph'
 
 import './_css/app.scss'
+import 'regenerator-runtime/runtime'
 
 const jost = Jost({
   subsets: ['latin'],

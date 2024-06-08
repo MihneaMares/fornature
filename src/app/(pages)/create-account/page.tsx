@@ -10,6 +10,7 @@ import CreateAccountForm from './CreateAccountForm'
 import classes from './index.module.scss'
 import Link from 'next/link'
 import Image from 'next/image'
+import { SessionProvider } from 'next-auth/react'
 
 export default async function CreateAccount() {
   await getMeUser({
@@ -42,7 +43,6 @@ export default async function CreateAccount() {
           </div>
 
           <p>Please enter details</p>
-
           <CreateAccountForm />
         </div>
       </div>

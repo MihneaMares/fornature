@@ -22,7 +22,7 @@ const Filters = ({categories}: {categories: Category[]}) => {
     }
   }
 
-  const handleSort = (value: string) => setSort(value)
+  const handleSort = (value: string | null) => setSort(value)
 
   return (
     <div className={classes.Filters}>

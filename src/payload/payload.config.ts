@@ -28,6 +28,9 @@ import { Header } from './globals/Header'
 import { Settings } from './globals/Settings'
 import { priceUpdated } from './stripe/webhooks/priceUpdated'
 import { productUpdated } from './stripe/webhooks/productUpdated'
+import Story from './collections/Blogs/Stories-categories/stories-categories'
+import StoryPage from './globals/Story'
+import handler from './endpoints/stories'
 
 const generateTitle: GenerateTitle = () => {
   return 'My Store'
@@ -81,8 +84,8 @@ export default buildConfig({
   }),
   // database-adapter-config-end
   serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL,
-  collections: [Pages, Products, Orders, Media, Categories, Users],
-  globals: [Settings, Header, Footer],
+  collections: [Pages, Products, Orders, Media, Categories, Users, Story],
+  globals: [Settings, Header, Footer, StoryPage],
   typescript: {
     outputFile: path.resolve(__dirname, 'payload-types.ts'),
   },
@@ -118,6 +121,11 @@ export default buildConfig({
       method: 'get',
       handler: seed,
     },
+    {
+      path: '/stories', // Define the URL path
+      method: 'get', // HTTP method
+      handler: handler, 
+    }
   ],
   plugins: [
     stripePlugin({

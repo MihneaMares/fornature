@@ -22,6 +22,8 @@
     "payload": "cross-env PAYLOAD_CONFIG_PATH=src/payload/payload.config.ts payload"
   },
   "dependencies": {
+    "@auth/prisma-adapter": "^2.1.0",
+    "@babel/runtime": "^7.24.6",
     "@payloadcms/bundler-webpack": "^1.0.0",
     "@payloadcms/db-mongodb": "^1.0.0",
     "@payloadcms/plugin-cloud": "^3.0.1",
@@ -30,21 +32,29 @@
     "@payloadcms/plugin-seo": "^1.0.10",
     "@payloadcms/plugin-stripe": "^0.0.19",
     "@payloadcms/richtext-slate": "^1.0.0",
+    "@prisma/client": "^5.14.0",
     "@stripe/react-stripe-js": "^1.16.3",
     "@stripe/stripe-js": "^1.46.0",
+    "axios": "^1.7.2",
     "cross-env": "^7.0.3",
-    "dotenv": "^8.2.0",
+    "dotenv": "^8.6.0",
     "escape-html": "^1.0.3",
-    "express": "^4.17.1",
+    "express": "^4.19.2",
+    "mongodb": "^6.7.0",
     "next": "13.5.2",
+    "next-auth": "^4.24.7",
     "payload": "^2.0.7",
     "payload-admin-bar": "^1.0.6",
+    "prisma": "^5.14.0",
     "qs": "6.11.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "7.45.4",
+    "react-quill": "^2.0.0",
     "react-router-dom": "5.3.4",
-    "stripe": "^10.2.0"
+    "regenerator-runtime": "^0.14.1",
+    "stripe": "^10.2.0",
+    "yarn": "^1.22.22"
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "^13.1.6",
@@ -55,6 +65,7 @@
     "@types/node": "18.11.3",
     "@types/qs": "^6.9.8",
     "@types/react": "18.0.21",
+    "@types/regenerator-runtime": "^0.13.6",
     "@typescript-eslint/eslint-plugin": "^5.51.0",
     "@typescript-eslint/parser": "^5.51.0",
     "copyfiles": "^2.4.1",
@@ -73,6 +84,7 @@
     "typescript": "^4.8.4"
   },
   "resolutions": {
-    "jackspeak": "2.1.1"
+    "jackspeak": "2.1.1",
+    "@babel/runtime": "^7.24.6"
   }
 }

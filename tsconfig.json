@@ -31,7 +31,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts"
-  ],
+, "src/app/(pages)/create-account/CreateAccountForm/index.jsx", "src/app/_api/posts/route.js"  ],
   "exclude": [
     "node_modules"
   ],

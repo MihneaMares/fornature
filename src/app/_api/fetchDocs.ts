@@ -8,6 +8,7 @@ import { GRAPHQL_API_URL } from './shared'
 import { payloadToken } from './token'
 import { query } from 'express'
 import { CATEGORIES } from '../_graphql/categories'
+import { STORY_CATEGORIES } from '../_graphql/story_categories'
 
 const queryMap = {
   pages: {
@@ -25,6 +26,10 @@ const queryMap = {
   categories: {
     query: CATEGORIES,
     key: 'Categories',
+  },
+  storycategories: {
+    query: STORY_CATEGORIES,
+    key: 'StoryCategories'
   }
 }
 

@@ -22,10 +22,18 @@ export const dynamic = 'force-dynamic'
 
 import Categories from '../../_components/Categories'
 import Promotion from '../../_components/Promotion'
-
+import global from './globals.module.scss'
 import classes from './index.module.scss'
+import Featured from '../../_components/Featured/featured'
+import StoryCategoriesList from '../../_components/StoryCategoriesList'
+import StoryCardList from '../../_components/StoryCardList'
+import StoryMenu from '../../_components/StoryMenu'
+import StoryPagination from '../../_components/StoryPagination'
+import WritePage from './Write/page'
+import { AuthProvider } from '../../_providers/Auth'
+import { SessionProvider, useSession } from 'next-auth/react'
 
-export default async function Page({ params: { slug = 'home' } }) {
+export default async function Page({ params: { slug = 'home' }}) {
   const { isEnabled: isDraftMode } = draftMode()
 
   let page: Page | null = null
@@ -59,26 +67,59 @@ export default async function Page({ params: { slug = 'home' } }) {
 
   const { hero, layout } = page
 
+  //const storyPage = parseInt(searchParams.storyPage) || 1;
+
   return (
     <React.Fragment>
-      {slug === 'home' ? (
-        <section>
-          <Hero {...hero} />
+      {(() => {
+        if (slug === 'home') {
+          return (
+            <section>
+              <Hero {...hero} />
+              <Gutter className={classes.home}>
+                <Categories categories={categories} />
+                <Promotion />
+              </Gutter>
+            </section>
+          );
+        } else if (slug === 'stories') {
+          return (
+            <div className={global.container}>
+              <div className={global.wrapper}>
+                <Featured />
+                <StoryCategoriesList />
+                <div className={classes.content}>
+                  <StoryCardList />
+                  <StoryMenu />
+                </div>
+              </div>
+            </div>
+            
+          )
+        } else if (slug === 'write') {
+          return (
+            <div className={global.container}>
+              <div className={global.wrapper}>
+                <WritePage />
+              </div>
+            </div>
+          )
+        } 
+        else 
+        {
+          const disableTopPadding = !hero || hero?.type === 'none' || hero?.type === 'lowImpact';
 
-          <Gutter className={classes.home}>
-            <Categories categories={categories} />
-            <Promotion />
-          </Gutter>
-        </section>
-      ) : (
-        <>
-          <Hero {...hero} />
-          <Blocks
-            blocks={layout}
-            disableTopPadding={!hero || hero?.type === 'none' || hero?.type === 'lowImpact'}
-          />
-        </>
-      )}
+          return (
+            <>
+              <Hero {...hero} />
+              <Blocks
+                blocks={layout}
+                disableTopPadding={disableTopPadding}
+              />
+            </>
+          );
+        }
+      })()}
     </React.Fragment>
   )
 }

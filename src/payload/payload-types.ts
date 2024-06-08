@@ -22,6 +22,7 @@ export interface Config {
     media: Media;
     categories: Category;
     users: User;
+    stories: Story;
     redirects: Redirect;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -30,6 +31,7 @@ export interface Config {
     settings: Settings;
     header: Header;
     footer: Footer;
+    'story-page': StoryPage;
   };
 }
 export interface Page {
@@ -431,6 +433,23 @@ export interface User {
   lockUntil?: string | null;
   password: string | null;
 }
+export interface Story {
+  id: string;
+  title: string;
+  content: {
+    [k: string]: unknown;
+  }[];
+  author?: string | null;
+  image?: string | Media | null;
+  tags?:
+    | {
+        storycategory?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
 export interface Redirect {
   id: string;
   from: string;
@@ -520,6 +539,23 @@ export interface Footer {
           icon?: string | Media | null;
         };
         id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+export interface StoryPage {
+  id: string;
+  hero: {
+    title: string;
+    image?: string | Media | null;
+  };
+  content?:
+    | {
+        posts?: (string | Story)[] | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'storyPosts';
       }[]
     | null;
   updatedAt?: string | null;

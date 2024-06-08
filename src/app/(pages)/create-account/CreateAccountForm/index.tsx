@@ -11,6 +11,7 @@ import { Message } from '../../../_components/Message'
 import { useAuth } from '../../../_providers/Auth'
 
 import classes from './index.module.scss'
+import { signIn, useSession } from 'next-auth/react'
 
 type FormData = {
   name: string
@@ -26,6 +27,7 @@ const CreateAccountForm: React.FC = () => {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+
 
   const {
     register,
@@ -124,6 +126,18 @@ const CreateAccountForm: React.FC = () => {
       <div>
         {'Already have an account? '}
         <Link href={`/login${allParams}`}>Login</Link>
+      </div>
+      <div>
+        {'Or, sign up with one of theese'}
+        
+        <div className={classes.container}>
+          
+            <div className={classes.socialButton} onClick={() => signIn("google")}>
+              Sign in with Google
+            </div>
+          
+        <div className={classes.socialButton}>Sign in with Facebook</div>
+        </div>
       </div>
     </form>
   )
