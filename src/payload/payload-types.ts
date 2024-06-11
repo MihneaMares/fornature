@@ -383,6 +383,12 @@ export interface Product {
           }
       )[]
     | null;
+  sizes?:
+    | {
+        size?: string | null;
+        id?: string | null;
+      }[]
+    | null;
   categories?: (string | Category)[] | null;
   relatedProducts?: (string | Product)[] | null;
   slug?: string | null;

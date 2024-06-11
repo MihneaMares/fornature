@@ -41,7 +41,10 @@ app.get('/posts', async (req, res) => {
     const database = client.db('ForNature');
     const collection = database.collection('Post');
 
-    const storyPosts = await collection.find().toArray();
+    const catSlug = req.query.catSlug;
+    const query = catSlug ? { catSlug } : {};
+
+    const storyPosts = await collection.find(query).toArray();
     res.json(storyPosts);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -49,6 +52,56 @@ app.get('/posts', async (req, res) => {
     await client.close();
   }
 });
+
+app.get('/posts/:slug', async (req, res) => {
+  try {
+    res.setHeader(
+      "Content-Security-Policy",
+      "connect-src 'self' http://localhost:3001/posts "
+    );
+    await client.connect();
+
+    const database = client.db('ForNature');
+    const collection = database.collection('Post');
+
+    const { slug } = req.params;
+    const post = await collection.findOne({ slug });
+
+    if (!post) {
+      res.status(404).json({ error: 'Post not found' });
+    } else {
+      res.json(post);
+    }
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  } finally {
+    await client.close();
+  }
+});
+
+app.get('/comments/:postSlug', async (req, res) => {
+  try {
+    res.setHeader(
+      "Content-Security-Policy",
+      "connect-src 'self' http://localhost:3001/comments "
+    );
+    await client.connect();
+    
+    const database = client.db('ForNature');
+    const collection = database.collection('Comment');
+
+    const { postSlug } = req.params; // Extract slug from the URL parameters
+    const query = { postSlug };
+
+    const comments = await collection.find(query).toArray();
+    res.json(comments);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  } finally {
+    await client.close();
+  }
+});
+
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);

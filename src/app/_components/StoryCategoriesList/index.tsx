@@ -19,13 +19,15 @@ const getData = async () => {
 
 const StoryCategoriesList = async () => {
   const data = await getData();
+
+  
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Popular Categories</h1>
       <div className={styles.categories}>
         {data?.map((item) => (
           <Link
-            href="/blog?cat=trails"
+            href={`/blog?catSlug=${item.slug}`}
             className={`${styles.category} ${styles[item.slug]}`}
             key={item._id}
           >

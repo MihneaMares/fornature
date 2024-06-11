@@ -115,6 +115,17 @@ const Products: CollectionConfig = {
               },
               blocks: [CallToAction, Content, MediaBlock, Archive],
             },
+            {
+              name: 'sizes',
+              label: 'Sizes',
+              fields: [
+                {
+                  name: 'size',
+                  type: 'text',
+                }
+              ],
+              type: 'array'
+            },
           ],
         },
       ],

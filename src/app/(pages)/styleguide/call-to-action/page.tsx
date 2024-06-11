@@ -33,7 +33,7 @@ export default async function CallToActionPage() {
             {
               children: [
                 {
-                  text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+                  text: 'Într-o dimineață răcoroasă de vară, am pornit într-o drumeție spre vârful muntelui Retezat. Traseul sinuos ne-a purtat prin păduri de brazi, pe lângă pârâuri cristaline și peste stânci abrupte.',
                 },
               ],
             },
@@ -67,7 +67,7 @@ export default async function CallToActionPage() {
             {
               children: [
                 {
-                  text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+                  text: 'Într-o dimineață răcoroasă de vară, am pornit într-o drumeție spre vârful muntelui Retezat.',
                 },
               ],
             },

@@ -1,3 +1,4 @@
+
 import React from 'react'
 import { Metadata } from 'next'
 import { draftMode } from 'next/headers'
@@ -38,6 +39,8 @@ export default async function Page({ params: { slug = 'home' }}) {
 
   let page: Page | null = null
   let categories: Category[] | null = null
+
+  let storyPage = 1;
 
   try {
     page = await fetchDoc<Page>({
@@ -89,7 +92,7 @@ export default async function Page({ params: { slug = 'home' }}) {
                 <Featured />
                 <StoryCategoriesList />
                 <div className={classes.content}>
-                  <StoryCardList />
+                  <StoryCardList storyPage={storyPage}/>
                   <StoryMenu />
                 </div>
               </div>

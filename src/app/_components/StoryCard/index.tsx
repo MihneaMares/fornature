@@ -6,7 +6,8 @@ import Image from "next/image";
 const StoryCard = ({item}) => {
     return (
       <div className={styles.container}>
-      {item.img && (
+        
+      {item.img && /*item.isApproved &&*/ (
         <div className={styles.imageContainer}>
           <Image src={item.img} alt="" fill className={styles.image} />
         </div>

@@ -24,13 +24,15 @@ async function fetchStoryCategories() {
   }
 }
 
-export const fetchStoryPosts = async() => {
+export const fetchStoryPosts = async(catSlug) => {
   try {
     await client.connect();
     const database = client.db('ForNature'); // Replace with your database name
     const collection = database.collection('Post'); // Replace with your collection name
 
-    const storyPosts = await collection.find().toArray();
+    const query = catSlug ? { catSlug } : {};
+    console.log(query)
+    const storyPosts = await collection.find(query).toArray();
     return storyPosts;
   } catch (error) {
     console.error('Error fetching story categories:', error);

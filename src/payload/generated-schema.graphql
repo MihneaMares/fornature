@@ -1280,6 +1280,7 @@ type Product {
   priceJSON: String
   enablePaywall: Boolean
   paywall: [Product_Paywall!]
+  sizes: [Product_Sizes!]
   categories: [Category!]
   relatedProducts: [Product!]
   slug: String
@@ -1293,6 +1294,11 @@ type Product {
 union Product_Layout = Cta | Content | MediaBlock | Archive
 
 union Product_Paywall = Cta | Content | MediaBlock | Archive
+
+type Product_Sizes {
+  size: String
+  id: String
+}
 
 type Product_Meta {
   title: String
@@ -3606,6 +3612,8 @@ input Product_where {
   stripeProductID: Product_stripeProductID_operator
   priceJSON: Product_priceJSON_operator
   enablePaywall: Product_enablePaywall_operator
+  sizes__size: Product_sizes__size_operator
+  sizes__id: Product_sizes__id_operator
   categories: Product_categories_operator
   relatedProducts: Product_relatedProducts_operator
   slug: Product_slug_operator
@@ -3664,6 +3672,28 @@ input Product_priceJSON_operator {
 input Product_enablePaywall_operator {
   equals: Boolean
   not_equals: Boolean
+  exists: Boolean
+}
+
+input Product_sizes__size_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input Product_sizes__id_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
   exists: Boolean
 }
 
@@ -3780,6 +3810,8 @@ input Product_where_and {
   stripeProductID: Product_stripeProductID_operator
   priceJSON: Product_priceJSON_operator
   enablePaywall: Product_enablePaywall_operator
+  sizes__size: Product_sizes__size_operator
+  sizes__id: Product_sizes__id_operator
   categories: Product_categories_operator
   relatedProducts: Product_relatedProducts_operator
   slug: Product_slug_operator
@@ -3801,6 +3833,8 @@ input Product_where_or {
   stripeProductID: Product_stripeProductID_operator
   priceJSON: Product_priceJSON_operator
   enablePaywall: Product_enablePaywall_operator
+  sizes__size: Product_sizes__size_operator
+  sizes__id: Product_sizes__id_operator
   categories: Product_categories_operator
   relatedProducts: Product_relatedProducts_operator
   slug: Product_slug_operator
@@ -3833,6 +3867,7 @@ type ProductsDocAccessFields {
   priceJSON: ProductsDocAccessFields_priceJSON
   enablePaywall: ProductsDocAccessFields_enablePaywall
   paywall: ProductsDocAccessFields_paywall
+  sizes: ProductsDocAccessFields_sizes
   categories: ProductsDocAccessFields_categories
   relatedProducts: ProductsDocAccessFields_relatedProducts
   slug: ProductsDocAccessFields_slug
@@ -4001,6 +4036,81 @@ type ProductsDocAccessFields_paywall_Update {
 }
 
 type ProductsDocAccessFields_paywall_Delete {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_sizes {
+  create: ProductsDocAccessFields_sizes_Create
+  read: ProductsDocAccessFields_sizes_Read
+  update: ProductsDocAccessFields_sizes_Update
+  delete: ProductsDocAccessFields_sizes_Delete
+  fields: ProductsDocAccessFields_sizes_Fields
+}
+
+type ProductsDocAccessFields_sizes_Create {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_sizes_Read {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_sizes_Update {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_sizes_Delete {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_sizes_Fields {
+  size: ProductsDocAccessFields_sizes_size
+  id: ProductsDocAccessFields_sizes_id
+}
+
+type ProductsDocAccessFields_sizes_size {
+  create: ProductsDocAccessFields_sizes_size_Create
+  read: ProductsDocAccessFields_sizes_size_Read
+  update: ProductsDocAccessFields_sizes_size_Update
+  delete: ProductsDocAccessFields_sizes_size_Delete
+}
+
+type ProductsDocAccessFields_sizes_size_Create {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_sizes_size_Read {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_sizes_size_Update {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_sizes_size_Delete {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_sizes_id {
+  create: ProductsDocAccessFields_sizes_id_Create
+  read: ProductsDocAccessFields_sizes_id_Read
+  update: ProductsDocAccessFields_sizes_id_Update
+  delete: ProductsDocAccessFields_sizes_id_Delete
+}
+
+type ProductsDocAccessFields_sizes_id_Create {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_sizes_id_Read {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_sizes_id_Update {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_sizes_id_Delete {
   permission: Boolean!
 }
 
@@ -4354,6 +4464,7 @@ type ProductVersion_Version {
   priceJSON: String
   enablePaywall: Boolean
   paywall: [ProductVersion_Version_Paywall!]
+  sizes: [ProductVersion_Version_Sizes!]
   categories: [Category!]
   relatedProducts: [Product!]
   slug: String
@@ -4367,6 +4478,11 @@ type ProductVersion_Version {
 union ProductVersion_Version_Layout = Cta | Content | MediaBlock | Archive
 
 union ProductVersion_Version_Paywall = Cta | Content | MediaBlock | Archive
+
+type ProductVersion_Version_Sizes {
+  size: String
+  id: String
+}
 
 type ProductVersion_Version_Meta {
   title: String
@@ -4562,6 +4678,8 @@ input versionsProduct_where {
   version__stripeProductID: versionsProduct_version__stripeProductID_operator
   version__priceJSON: versionsProduct_version__priceJSON_operator
   version__enablePaywall: versionsProduct_version__enablePaywall_operator
+  version__sizes__size: versionsProduct_version__sizes__size_operator
+  version__sizes__id: versionsProduct_version__sizes__id_operator
   version__categories: versionsProduct_version__categories_operator
   version__relatedProducts: versionsProduct_version__relatedProducts_operator
   version__slug: versionsProduct_version__slug_operator
@@ -4632,6 +4750,28 @@ input versionsProduct_version__priceJSON_operator {
 input versionsProduct_version__enablePaywall_operator {
   equals: Boolean
   not_equals: Boolean
+  exists: Boolean
+}
+
+input versionsProduct_version__sizes__size_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input versionsProduct_version__sizes__id_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
   exists: Boolean
 }
 
@@ -4777,6 +4917,8 @@ input versionsProduct_where_and {
   version__stripeProductID: versionsProduct_version__stripeProductID_operator
   version__priceJSON: versionsProduct_version__priceJSON_operator
   version__enablePaywall: versionsProduct_version__enablePaywall_operator
+  version__sizes__size: versionsProduct_version__sizes__size_operator
+  version__sizes__id: versionsProduct_version__sizes__id_operator
   version__categories: versionsProduct_version__categories_operator
   version__relatedProducts: versionsProduct_version__relatedProducts_operator
   version__slug: versionsProduct_version__slug_operator
@@ -4802,6 +4944,8 @@ input versionsProduct_where_or {
   version__stripeProductID: versionsProduct_version__stripeProductID_operator
   version__priceJSON: versionsProduct_version__priceJSON_operator
   version__enablePaywall: versionsProduct_version__enablePaywall_operator
+  version__sizes__size: versionsProduct_version__sizes__size_operator
+  version__sizes__id: versionsProduct_version__sizes__id_operator
   version__categories: versionsProduct_version__categories_operator
   version__relatedProducts: versionsProduct_version__relatedProducts_operator
   version__slug: versionsProduct_version__slug_operator
@@ -10170,6 +10314,7 @@ type ProductsFields {
   priceJSON: ProductsFields_priceJSON
   enablePaywall: ProductsFields_enablePaywall
   paywall: ProductsFields_paywall
+  sizes: ProductsFields_sizes
   categories: ProductsFields_categories
   relatedProducts: ProductsFields_relatedProducts
   slug: ProductsFields_slug
@@ -10338,6 +10483,81 @@ type ProductsFields_paywall_Update {
 }
 
 type ProductsFields_paywall_Delete {
+  permission: Boolean!
+}
+
+type ProductsFields_sizes {
+  create: ProductsFields_sizes_Create
+  read: ProductsFields_sizes_Read
+  update: ProductsFields_sizes_Update
+  delete: ProductsFields_sizes_Delete
+  fields: ProductsFields_sizes_Fields
+}
+
+type ProductsFields_sizes_Create {
+  permission: Boolean!
+}
+
+type ProductsFields_sizes_Read {
+  permission: Boolean!
+}
+
+type ProductsFields_sizes_Update {
+  permission: Boolean!
+}
+
+type ProductsFields_sizes_Delete {
+  permission: Boolean!
+}
+
+type ProductsFields_sizes_Fields {
+  size: ProductsFields_sizes_size
+  id: ProductsFields_sizes_id
+}
+
+type ProductsFields_sizes_size {
+  create: ProductsFields_sizes_size_Create
+  read: ProductsFields_sizes_size_Read
+  update: ProductsFields_sizes_size_Update
+  delete: ProductsFields_sizes_size_Delete
+}
+
+type ProductsFields_sizes_size_Create {
+  permission: Boolean!
+}
+
+type ProductsFields_sizes_size_Read {
+  permission: Boolean!
+}
+
+type ProductsFields_sizes_size_Update {
+  permission: Boolean!
+}
+
+type ProductsFields_sizes_size_Delete {
+  permission: Boolean!
+}
+
+type ProductsFields_sizes_id {
+  create: ProductsFields_sizes_id_Create
+  read: ProductsFields_sizes_id_Read
+  update: ProductsFields_sizes_id_Update
+  delete: ProductsFields_sizes_id_Delete
+}
+
+type ProductsFields_sizes_id_Create {
+  permission: Boolean!
+}
+
+type ProductsFields_sizes_id_Read {
+  permission: Boolean!
+}
+
+type ProductsFields_sizes_id_Update {
+  permission: Boolean!
+}
+
+type ProductsFields_sizes_id_Delete {
   permission: Boolean!
 }
 
@@ -13532,6 +13752,7 @@ input mutationProductInput {
   priceJSON: String
   enablePaywall: Boolean
   paywall: JSON
+  sizes: [mutationProduct_SizesInput]
   categories: [String]
   relatedProducts: [String]
   slug: String
@@ -13540,6 +13761,11 @@ input mutationProductInput {
   updatedAt: String
   createdAt: String
   _status: Product__status_MutationInput
+}
+
+input mutationProduct_SizesInput {
+  size: String
+  id: String
 }
 
 input mutationProduct_MetaInput {
@@ -13561,6 +13787,7 @@ input mutationProductUpdateInput {
   priceJSON: String
   enablePaywall: Boolean
   paywall: JSON
+  sizes: [mutationProductUpdate_SizesInput]
   categories: [String]
   relatedProducts: [String]
   slug: String
@@ -13569,6 +13796,11 @@ input mutationProductUpdateInput {
   updatedAt: String
   createdAt: String
   _status: ProductUpdate__status_MutationInput
+}
+
+input mutationProductUpdate_SizesInput {
+  size: String
+  id: String
 }
 
 input mutationProductUpdate_MetaInput {

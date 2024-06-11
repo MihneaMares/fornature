@@ -28,6 +28,9 @@ export const PRODUCT = `
         }
         priceJSON
         enablePaywall
+        sizes {
+          size
+        }
         relatedProducts {
           id
           slug

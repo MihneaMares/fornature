@@ -1,4 +1,5 @@
-import React, { Fragment } from 'react'
+"use client"
+import React, { Fragment, useState } from 'react'
 
 import { Category, Product } from '../../../payload/payload-types'
 import { AddToCartButton } from '../../_components/AddToCartButton'
@@ -11,7 +12,13 @@ import classes from './index.module.scss'
 export const ProductHero: React.FC<{
   product: Product
 }> = ({ product }) => {
-  const { title, categories, meta: { image: metaImage, description } = {} } = product
+  const { title, categories, sizes, meta: { image: metaImage, description } = {} } = product
+
+  const [selectedSize, setSelectedSize] = useState('');
+
+  const handleSizeChange = (event) => {
+    setSelectedSize(event.target.value);
+  };
 
   return (
     <Gutter className={classes.productHero}>
@@ -50,6 +57,29 @@ export const ProductHero: React.FC<{
           <h6>Description</h6>
           <p>{description}</p>
         </div>
+        
+        {product.sizes && product.sizes.length > 0 && (
+        <div>
+          <h3>Select Size:</h3>
+          <div className={classes.sizeoptions}>
+            {product.sizes.map((size, index) => (
+              <div key={index} className={classes.sizeoption}>
+                <label>
+                  <input
+                    type="radio"
+                    name="size"
+                    value={size.size}
+                    checked={selectedSize === size.size}
+                    onChange={handleSizeChange}
+                  />
+                  {size.size}
+                </label>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
 
         <AddToCartButton product={product} className={classes.addToCartButton} />
       </div>
