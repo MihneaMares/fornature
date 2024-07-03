@@ -1,4 +1,3 @@
-
 import React from 'react'
 import { Metadata } from 'next'
 import { draftMode } from 'next/headers'
@@ -31,8 +30,7 @@ import StoryCardList from '../../_components/StoryCardList'
 import StoryMenu from '../../_components/StoryMenu'
 import StoryPagination from '../../_components/StoryPagination'
 import WritePage from './Write/page'
-import { AuthProvider } from '../../_providers/Auth'
-import { SessionProvider, useSession } from 'next-auth/react'
+import Notification from '../../_components/PostNotification/PostNotification'
 
 export default async function Page({ params: { slug = 'home' }}) {
   const { isEnabled: isDraftMode } = draftMode()
@@ -160,3 +158,4 @@ export async function generateMetadata({ params: { slug = 'home' } }): Promise<M
 
   return generateMeta({ doc: page })
 }
+

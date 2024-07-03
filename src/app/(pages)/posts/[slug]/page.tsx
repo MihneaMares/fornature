@@ -1,9 +1,11 @@
+
 import React from 'react'
 import styles from './singleStoryPage.module.scss'
 import global from './singleStoryPage.module.scss'
 import Image from 'next/image'
 import StoryMenu from '../../../_components/StoryMenu'
 import StoryComments from '../../../_components/StoryComments'
+
 
 const getData = async (slug) => {
   const res = await fetch(`http://localhost:3001/posts/${slug}`, {
@@ -59,6 +61,6 @@ const SingleStoryPage = async ({params}) => {
       </div>
     </div>
   );
-}
+};
 
 export default SingleStoryPage

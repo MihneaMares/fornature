@@ -36,11 +36,14 @@
     "@stripe/react-stripe-js": "^1.16.3",
     "@stripe/stripe-js": "^1.46.0",
     "axios": "^1.7.2",
+    "body-parser": "^1.20.2",
     "cross-env": "^7.0.3",
     "dotenv": "^8.6.0",
     "escape-html": "^1.0.3",
     "express": "^4.19.2",
+    "firebase": "^10.12.2",
     "fs": "^0.0.1-security",
+    "helmet": "^7.1.0",
     "mongodb": "^6.7.0",
     "next": "13.5.2",
     "next-auth": "^4.24.7",
@@ -55,6 +58,7 @@
     "react-router-dom": "5.3.4",
     "regenerator-runtime": "^0.14.1",
     "stripe": "^10.2.0",
+    "swr": "^2.2.5",
     "yarn": "^1.22.22"
   },
   "devDependencies": {
@@ -89,7 +93,7 @@
     "os": false,
     "path": false,
     "child_process": false,
-    "promises" : false
+    "promises": false
   },
   "resolutions": {
     "jackspeak": "2.1.1",

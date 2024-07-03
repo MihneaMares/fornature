@@ -1,6 +1,10 @@
 import dotenv from 'dotenv'
 import path from 'path'
+const helmet = require('helmet');
+import express from 'express'
+import payload from 'payload'
 
+import { seed } from './payload/seed'
 // This file is used to replace `server.ts` when ejecting i.e. `yarn eject`
 // See `../eject.ts` for exact details on how this file is used
 // See `./README.md#eject` for more information
@@ -9,18 +13,25 @@ dotenv.config({
   path: path.resolve(__dirname, '../.env'),
 })
 
-import express from 'express'
-import payload from 'payload'
 
-import { seed } from './payload/seed'
 
 const app = express()
 const PORT = process.env.PORT || 3000
-
+app.use(helmet());
 // Redirect root to the admin panel
 app.get('/', (_, res) => {
   res.redirect('/admin')
 })
+
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'"],
+      connectSrc: ["'self'", "http://localhost:3001"],
+      // Other directives...
+    },
+  })
+);
 
 const start = async (): Promise<void> => {
   await payload.init({

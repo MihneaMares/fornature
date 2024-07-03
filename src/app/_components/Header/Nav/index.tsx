@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useState } from 'react'
 import Link from 'next/link'
 
 import { Header as HeaderType } from '../../../../payload/payload-types'
@@ -8,12 +8,22 @@ import { useAuth } from '../../../_providers/Auth'
 import { Button } from '../../Button'
 import { CartLink } from '../../CartLink'
 import { CMSLink } from '../../Link'
-
+import { LogoutPage } from '../../../(pages)/logout/LogoutPage'
 import classes from './index.module.scss'
 
 export const HeaderNav: React.FC<{ header: HeaderType }> = ({ header }) => {
   const navItems = header?.navItems || []
   const { user } = useAuth()
+  const { logout } = useAuth()
+  const [success, setSuccess] = useState('')
+
+
+
+  const doLogout = async () => {
+    await logout()
+    setSuccess('Logged out successfully.')
+    window.location.href = '/login'
+  }
 
   return (
     <nav className={[classes.nav, user === undefined && classes.hide].filter(Boolean).join(' ')}>
@@ -29,6 +39,7 @@ export const HeaderNav: React.FC<{ header: HeaderType }> = ({ header }) => {
       }
       {!user && (
         <Button
+          className={classes.logButton}
           el="link"
           href="/login"
           label="Login"
@@ -36,7 +47,19 @@ export const HeaderNav: React.FC<{ header: HeaderType }> = ({ header }) => {
           onClick={() => (window.location.href = '/login')}
         />
       )}
-      {user && <CartLink />}
+      {user && (
+        <>
+          <CartLink />
+          <Button 
+            className={classes.logButton}
+            el='link'
+            href='/logout'
+            label='Logout'
+            appearance='primary'
+            onClick={doLogout}
+          />
+        </>
+      )}
     </nav>
   )
 }

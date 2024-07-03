@@ -1,5 +1,5 @@
 
-import React, from 'react'
+import React from 'react'
 import styles from './index.module.scss'
 import StoryCardList from '../../_components/StoryCardList'
 import StoryMenu from '../../_components/StoryMenu'

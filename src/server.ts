@@ -2,18 +2,31 @@ import dotenv from 'dotenv'
 import next from 'next'
 import nextBuild from 'next/dist/build'
 import path from 'path'
+import express from 'express'
+import payload from 'payload'
+const helmet = require('helmet');
 
 dotenv.config({
   path: path.resolve(__dirname, '../.env'),
 })
 
-import express from 'express'
-import payload from 'payload'
+
 
 import { seed } from './payload/seed'
 
 const app = express()
 const PORT = process.env.PORT || 3000
+app.use(helmet());
+
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'"],
+      connectSrc: ["'self'", "http://localhost:3001"],
+      // Other directives...
+    },
+  })
+);
 
 const start = async (): Promise<void> => {
   await payload.init({

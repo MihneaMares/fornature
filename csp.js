@@ -17,12 +17,15 @@ const policies = {
     'https://checkout.stripe.com',
     'https://js.stripe.com',
     'https://hooks.stripe.com',
+    'https://firebasestorage.googleapis.com'
   ],
   'connect-src': [
     "'self'",
     'https://checkout.stripe.com',
     'https://api.stripe.com',
     'https://maps.googleapis.com',
+    'http://localhost:3001',
+    'https://firebasestorage.googleapis.com'
   ],
 }
 

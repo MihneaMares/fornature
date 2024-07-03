@@ -15,7 +15,7 @@ const StoryMenuPosts = ({withImage}) => {
             <div className={styles.textContainer}>
               <span className={`${styles.category} ${styles.trails}`}>Trails</span>
               <h3 className={styles.postTitle}>
-                Într-o dimineață răcoroasă de vară, am pornit într-o drumeție spre vârful muntelui Retezat.
+              On a cool summer morning, we embarked on a hike to the top of Mount Retezat.
               </h3>
               <div className={styles.detail}>
                 <span className={styles.username}>Ioana Vasilescu</span>
@@ -34,7 +34,7 @@ const StoryMenuPosts = ({withImage}) => {
                 Culture Event
               </span>
               <h3 className={styles.postTitle}>
-                Muzicienii talentați au improvizat melodii captivante, iar atmosfera a fost electrizantă..
+              The talented musicians improvised captivating songs, and the atmosphere was electrifying..
               </h3>
               <div className={styles.detail}>
                 <span className={styles.username}>Mihai Dumitrescu</span>
@@ -51,7 +51,7 @@ const StoryMenuPosts = ({withImage}) => {
             <div className={styles.textContainer}>
               <span className={`${styles.category} ${styles.camping}`}>Camping</span>
               <h3 className={styles.postTitle}>
-                Am petrecut o seară de camping liniștită sub un cer înstelat, înconjurați de natura sălbatică..
+              We spent a quiet evening camping under a starry sky, surrounded by wild nature..
               </h3>
               <div className={styles.detail}>
                 <span className={styles.username}>Elena Ionescu</span>
@@ -70,7 +70,7 @@ const StoryMenuPosts = ({withImage}) => {
                 Equipment
               </span>
               <h3 className={styles.postTitle}>
-                Geaca impermeabilă de drumeție m-a protejat excelent de ploaie și vânt pe parcursul întregii excursii montane.
+              The waterproof hiking jacket protected me excellently from rain and wind throughout the mountain trip.
               </h3>
               <div className={styles.detail}>
                 <span className={styles.username}>Andrei Popescu</span>

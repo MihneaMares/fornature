@@ -14,7 +14,7 @@ const BeforeDashboard: React.FC = () => {
       <Banner className={`${baseClass}__banner`} type="success">
         <h4>Welcome to your dashboard!</h4>
       </Banner>
-      Here&apos;s what to do next:
+      {/* Here&apos;s what to do next:
       <ul className={`${baseClass}__instructions`}>
         <li>
           <SeedButton />
@@ -84,15 +84,15 @@ const BeforeDashboard: React.FC = () => {
           Commit and push your changes to the repository to trigger a redeployment of your project.
         </li>
       </ul>
-      {'Pro Tip: This block is a '}
-      <a
+      {'Pro Tip: This block is a '} */}
+      {/* <a
         href={'https://payloadcms.com/docs/admin/components#base-component-overrides'}
         target="_blank"
         rel="noopener noreferrer"
       >
         custom component
       </a>
-      , you can remove it at any time by updating your <strong>payload.config</strong>.
+      , you can remove it at any time by updating your <strong>payload.config</strong>. */}
     </div>
   )
 }
